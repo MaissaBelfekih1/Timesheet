@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.hamcrest.core.IsEqual;
@@ -78,30 +79,11 @@ public class EmployeServiceImplTest {
 	  }
 	  */
 
-	    @Test
-	  public void ajouterContrattest()
-	  {
-	    	es.ajouterContrat(contrat);
-			Assertions.assertThat(contrat.getReference()).isGreaterThan(0);
-	  }
-	  
-
-	@Test
-	public void getNombreEmployeJPQLTest()
-	{
-	int s=	es.getNombreEmployeJPQL();
-	Assertions.assertThat(s).isGreaterThan(0);
-
-	}
 	
 
-	@Test
-	public void getAllEmployeByEntrepriseTest()
-	{
-		List<Employe>  s=es.getAllEmployeByEntreprise(entrepriseRepoistory.findById(1).get());
-		Assertions.assertThat(s.size()).isGreaterThan(0);
+	
 
-	}
+	
 	
 /*		
 	@Test
@@ -111,13 +93,7 @@ public class EmployeServiceImplTest {
 	}
 	*/
 
-	@Test
-	public void getSalaireMoyenByDepartementIdTest() {
-		Double e= es.getSalaireMoyenByDepartementId(1);
-		Assertions.assertThat(e).isGreaterThan(0);
-
 	
-	}
 
 	
 	/*
@@ -152,6 +128,188 @@ public class EmployeServiceImplTest {
 
 		Assertions.assertThat(d.isEmpty()).isFalse();
 	}
+	
+
+	
+	
+	
+	    @Test
+	    public void updateEmployeeTest(){
+
+			es.mettreAjourEmailByEmployeId("papa@outlook.fr", 1);
+
+			Employe employeeUpdated=employeRepository.findById(1).get();
+	        Assertions.assertThat(employeeUpdated.getEmail()).isEqualTo("papa@outlook.fr");
+
+	  }
+	    
+	    
+	 
+	  
+	  @Test
+	  public void getEmployePrenomByIdTest()
+	  {
+		  
+		  
+		  String ch = es.getEmployePrenomById(1);
+		  
+			Assertions.assertThat(ch).isEqualTo("chaieb");
+
+	  }
+	  
+	 @Test
+	 public void deleteEmployeByIdtest()
+	 {
+		    es.deleteEmployeById(4);
+	        Employe employee1 = null;
+
+	        Optional<Employe> optionalEmployee = employeRepository.findById(4);
+
+	        if(optionalEmployee.isPresent()){
+	            employee1 = optionalEmployee.get();
+	        }
+	        
+	        Assertions.assertThat(employee1).isNull();
+
+	 }
+	    @Test
+	  public void ajouterContrattest()
+	  {
+	    	es.ajouterContrat(contrat);
+			Assertions.assertThat(contrat.getReference()).isGreaterThan(0);
+	  }
+	  
+	  
+	  
+	@Test
+	public void deleteContratByIdTest()
+	{
+	    es.deleteContratById(10);
+	    Contrat c = null;
+
+        Optional<Contrat> optionaContrat = contratRepoistory.findById(10);
+
+        if(optionaContrat.isPresent()){
+            c = optionaContrat.get();
+        }
+        
+        Assertions.assertThat(c).isNull();
+
+		
+	}
+	
+	
+	@Test
+	public void getNombreEmployeJPQLTest()
+	{
+	int s=	es.getNombreEmployeJPQL();
+	Assertions.assertThat(s).isGreaterThan(0);
+
+	}
+	
+	
+	
+	
+	@Test
+	public void getAllEmployeNamesJPQLTest()
+	{
+		List<String>  s=es.getAllEmployeNamesJPQL();
+		Assertions.assertThat(s.size()).isGreaterThan(0);
+
+	}
+	
+	
+	@Test
+	public void getAllEmployeByEntrepriseTest()
+	{
+		List<Employe>  s=es.getAllEmployeByEntreprise(entrepriseRepoistory.findById(1).get());
+		Assertions.assertThat(s.size()).isGreaterThan(0);
+
+	}
+	
+	@Test
+	public void mettreAjourEmailByEmployeIdJPQLTest()
+	{
+		es.mettreAjourEmailByEmployeIdJPQL("papa2@outlook.fr", 1);
+
+		Employe employeeUpdated=employeRepository.findById(1).get();
+        Assertions.assertThat(employeeUpdated.getEmail()).isEqualTo("papa2@outlook.fr");
+	}
+	
+	
+	@Test
+	public void deleteAllContratJPQLTest() {
+		es.deleteAllContratJPQL();
+		Assertions.assertThat(contratRepoistory.findAll()).isNull();
+	}
+	
+	
+	@Test
+	public void getSalaireByEmployeIdJPQLTest() {
+		float i =es.getSalaireByEmployeIdJPQL(1);
+		System.out.println(i);
+		Assertions.assertThat(i).isGreaterThan(0);
+
+	}
+
+	
+	
+	@Test
+	public void getSalaireMoyenByDepartementIdTest() {
+		Double e= es.getSalaireMoyenByDepartementId(1);
+		Assertions.assertThat(e).isGreaterThan(0);
+
+	
+	}
+	
+	
+	@Test
+	public void getAllEmployesTest() {
+    List<Employe> e =es.getAllEmployes();
+    Assertions.assertThat(e.size()).isGreaterThan(0);
+       }
+
+	
+	
+	
+	
+	/**
+	@Test
+	public void getTimesheetsByMissionAndDateTest()
+	{
+		Employe employe =employeRepository.findById(1).get();
+		Mission mission =mr.findById(1).get();
+		
+	<Timesheet> ts1= es.getTimesheetsByMissionAndDate(employe, mission, date1,date2);
+		Assertions.assertThat(ts1.size()).isGreaterThan(0);
+
+	}
+	
+	*/
+	
+	
+	/*
+	public void desaffecterEmployeDuDepartementTest()
+	{
+		es.desaffecterEmployeDuDepartement(1, 1);
+		List<Departement> d =employeRepository.findById(1).get().getDepartements(); 
+		
+		Assertions.assertThat(d.isEmpty()).isTrue();
+
+	}
+
+	
+	@Test
+	public void affecterContratAEmployeTest()
+	{
+		es.affecterContratAEmploye(11, 1);
+		Contrat d =employeRepository.findById(1).get().getContrat(); 
+
+		Assertions.assertThat(d.getReference()).isEqualTo(11);
+	}
+	*/
+	
+	
 	
 	
 }

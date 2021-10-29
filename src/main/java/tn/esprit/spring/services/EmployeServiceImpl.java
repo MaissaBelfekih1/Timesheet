@@ -106,7 +106,9 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 		
 		} catch (Exception e) {
-			logger.error("Oops! We have an Error. "+e);
+			
+			
+			logger.error("Oops! We have an Error here . "+e);
 		}
 
 	}
@@ -118,8 +120,10 @@ public class EmployeServiceImpl implements IEmployeService {
 		Optional <Departement> dept = deptRepoistory.findById(depId);
     	if(emp.isPresent() && dept.isPresent())
     	{
+    		
     	Employe employeManagedEntity = emp.get();
 	
+    	
     	{
 		try {
 			
