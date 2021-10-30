@@ -13,4 +13,8 @@ public interface ITimesheetService {
 	public int ajouterMission(Mission mission);
 	public int affecterMissionADepartement(int missionId, int depId);
 	public boolean ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin);
+	
+	public int validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId);
+	public List<Mission> findAllMissionByEmployeJPQL(int employeId);
+	public List<Employe> getAllEmployeByMission(int missionId);
 }
