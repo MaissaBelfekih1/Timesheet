@@ -36,19 +36,4 @@ public class IControllerTimesheetImpl {
 
 	}
 
-	
-	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-		itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
-
-	}
-	public List<Mission> findAllMissionByEmployeJPQL(int employeId) {
-
-		return itimesheetservice.findAllMissionByEmployeJPQL(employeId);
-	}
-
-
-	public List<Employe> getAllEmployeByMission(int missionId) {
-
-		return itimesheetservice.getAllEmployeByMission(missionId);
-	}
 }

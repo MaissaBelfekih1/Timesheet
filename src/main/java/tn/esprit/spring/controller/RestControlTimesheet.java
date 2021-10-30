@@ -54,26 +54,4 @@ public class RestControlTimesheet {
 
 	}
 
-	// http://localhost:8081/SpringMVC/servlet/affecterMissionADepartement/4/4
-	@PutMapping(value = "/validerTimesheet/{idmission}/{iddept}") 
-	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
-		itimesheetservice.validerTimesheet(missionId, employeId, dateDebut, dateFin, validateurId);
-
-	}
-	
-	// URL : http://localhost:8081/SpringMVC/servlet/findAllMissionByEmployeJPQL/1
-    @GetMapping(value = "findAllMissionByEmployeJPQL/{idemp}")
-    @ResponseBody
-	public List<Mission> findAllMissionByEmployeJPQL(@PathVariable("idemp") int employeId) {
-
-		return itimesheetservice.findAllMissionByEmployeJPQL(employeId);
-	}
-
-    // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeByMission/1
-    @GetMapping(value = "getAllEmployeByMission/{idmission}")
-    @ResponseBody
-	public List<Employe> getAllEmployeByMission(@PathVariable("idmission") int missionId) {
-
-		return itimesheetservice.getAllEmployeByMission(missionId);
-	}
 }
