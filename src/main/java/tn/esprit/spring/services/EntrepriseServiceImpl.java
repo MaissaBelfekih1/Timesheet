@@ -17,7 +17,7 @@ import tn.esprit.spring.repository.EntrepriseRepository;
 
 @Service
 public class EntrepriseServiceImpl implements IEntrepriseService {
-	private static final Logger logger = LogManager.getLogger(EmployeServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(EntrepriseServiceImpl.class);
 
 	@Autowired
     EntrepriseRepository entrepriseRepoistory;
@@ -27,8 +27,19 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	
 	@Override
 	public int ajouterEntreprise(Entreprise entreprise) {
-		//oui
-		return 0;
+		try
+		{
+		logger.info("Ajouter une entreprise");
+		logger.debug("Debugging log");
+		entrepriseRepoistory.save(entreprise);
+		}
+		catch(Exception ex)
+		{
+			logger.error("Erreur ajouter entreprise");
+		}
+		
+		return entreprise.getId();
+		
 	}
 	@Override
 	public int ajouterDepartement(Departement dep) {
@@ -45,8 +56,22 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 	}
 	@Override
-	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
-		//oui
+public int affecterDepartementAEntreprise(int depId, int entrepriseId) {
+		
+		try{
+		Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
+		Departement depManagedEntity = deptRepoistory.findById(depId).get();
+		
+		depManagedEntity.setEntreprise(entrepriseManagedEntity);
+		deptRepoistory.save(depManagedEntity);
+		logger.info("affectaté avec succés");
+		logger.debug("affectation entreprise");
+		
+		}
+		catch(Exception ex){
+			logger.error("Erreur affectation");
+		}
+		return depId ; 
 		
 	}
 	@Override
@@ -68,9 +93,17 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		return depNames;
 	}
 	@Override
-	public void deleteEntrepriseById(int entrepriseId) {
-		//oui
-		
+	public int deleteEntrepriseById(int entrepriseId) {
+		try {
+			
+		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
+		logger.info("entreprise supprimée");
+		logger.debug("suppression entreprise");
+		}
+		catch(Exception ex){
+			logger.error("Erreur delete entreprise");
+		}
+		return 0 ; 
 	}
 	@Transactional
 	public int deleteDepartementById(int depId) {
@@ -86,8 +119,19 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	}
 	@Override
 	public Entreprise getEntrepriseById(int entrepriseId) {
-		//oui
-		return null;
+		Entreprise e = new Entreprise(); 
+		try{
+			
+			e = entrepriseRepoistory.findById(entrepriseId).get();
+			logger.info("entreprise trouvée");
+			logger.debug("recherche entreprise");
+			
+		}
+		catch(Exception ex){
+			logger.error("entreprise introuvable");
+		}
+		
+		return e ; 
 	}
 	
 	
