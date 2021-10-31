@@ -43,4 +43,29 @@ public class EntrepriseServiceImplTest {
 	assertEquals(7,se.ajouterDepartement(d1));
 	}
 	
+	@Test
+    public void testajouterEntreprise(){
+
+        assertEquals(1,se.ajouterEntreprise(e2));
+
+    }
+	@Test
+    public void testgetEntrepriseById()
+    {
+        assertEquals(2,se.getEntrepriseById(1).getId());
+
+
+    }
+	
+	 @Test
+	    public void testaffecterDepartementAEntreprise()
+	    {
+	        assertEquals(2 ,se.affecterDepartementAEntreprise(2, 1));
+	    }
+	 
+	 @Test
+	    public void testdeleteEntrepriseById(){
+	        assertEquals(1,se.deleteEntrepriseById(2));
+	    }
+
 }
