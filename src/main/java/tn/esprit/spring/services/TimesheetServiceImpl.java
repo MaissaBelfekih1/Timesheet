@@ -35,28 +35,29 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	@Autowired
 	EmployeRepository employeRepository;
 	@Override
-	public int ajouterMission(Mission mission) {
+	public boolean ajouterMission(Mission mission) {
 		try
 		{
 		logger.info("Ajouter une mission");
 		logger.debug("Debugging log");
 		missionRepository.save(mission);
+		return true;
 		}
 		catch(Exception ex)
 		{
 			logger.error("Erreur");
 		}
 		
-		return mission.getId();
+		return false;
 	}
 
 	@Override
 	public int affecterMissionADepartement(int missionId, int depId) {
 		Mission mission = missionRepository.findById(missionId).get();
-		logger.info("Id de mission"+missionRepository.findById(missionId).get());
+		logger.info("Id de mission " +mission.getId());
 		
 		Departement dep = deptRepoistory.findById(depId).get();
-		logger.info("Id de departement"+deptRepoistory.findById(depId).get());
+		logger.info("Id de departement"+dep.getId());
 		
 		try
 		{
@@ -100,6 +101,7 @@ TimesheetPK timesheetPK = new TimesheetPK();
 		logger.info("ajouterTimesheet");
 		logger.debug("Debugging log");
 		timesheetRepository.save(timesheet);
+		return true;
 	}
 		
 		catch(Exception ex)

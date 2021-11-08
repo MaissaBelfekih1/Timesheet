@@ -10,7 +10,7 @@ import tn.esprit.spring.entities.Mission;
 
 public interface ITimesheetService {
 	
-	public int ajouterMission(Mission mission);
+	public boolean ajouterMission(Mission mission);
 	public int affecterMissionADepartement(int missionId, int depId);
 	public boolean ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin);
 	

@@ -27,15 +27,14 @@ public class TimesheetTest {
     TimesheetServiceImpl time;
     Mission m = new Mission("deplacement","deplacement");
  
-	@SuppressWarnings("deprecation")
-	Date date = new Date(2021,10,07);
-	@SuppressWarnings("deprecation")
-	Date date2 = new Date(2021,10,22);
+	
+    Date date = new Date(1633824000000l);
+	Date date2 = new Date(1633824000000l);
 	
 	@Test
 	public void testajouterMission()
 	{
-		assertEquals(42, time.ajouterMission(m));
+		assertEquals(true, time.ajouterMission(m));
 		
 	}
 
@@ -49,7 +48,7 @@ public class TimesheetTest {
 	@Test
 	public void testajouterTimesheet()
 	{
-		assertEquals(false,time.ajouterTimesheet(33, 1, date, date2));
+		assertEquals(true,time.ajouterTimesheet(33, 1, date, date2));
 	}
 
 
