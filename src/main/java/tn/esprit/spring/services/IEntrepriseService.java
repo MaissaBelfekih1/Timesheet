@@ -7,11 +7,11 @@ import tn.esprit.spring.entities.Entreprise;
 
 public interface IEntrepriseService {
 	
-	public int ajouterEntreprise(Entreprise entreprise);
-	public int ajouterDepartement(Departement dep);
+	public boolean ajouterEntreprise(Entreprise entreprise);
+	public boolean ajouterDepartement(Departement dep);
 	public int affecterDepartementAEntreprise(int depId, int entrepriseId);
 	List<String> getAllDepartementsNamesByEntreprise(int entrepriseId);
-	public int deleteEntrepriseById(int entrepriseId);
-	public int deleteDepartementById(int depId);
+	public boolean deleteEntrepriseById(int entrepriseId);
+	public boolean deleteDepartementById(int depId);
 	public Entreprise getEntrepriseById(int entrepriseId);
 }

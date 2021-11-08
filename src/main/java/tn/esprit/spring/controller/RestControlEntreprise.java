@@ -29,13 +29,11 @@ public class RestControlEntreprise {
 	@Autowired
 	ITimesheetService itimesheetservice;
 	
-	// Ajouter Entreprise : http://localhost:8081/SpringMVC/servlet/ajouterEntreprise
-	//{"id":1,"name":"SSII Consulting","raisonSocial":"Cite El Ghazela"}
 	
-	// http://localhost:8081/SpringMVC/servlet/affecterDepartementAEntreprise/1/1
+
     
 	@PostMapping("/ajouterDepartement")
-    public int ajouterDepartement(@PathVariable("Departement") Departement dep) {
+    public boolean ajouterDepartement(@PathVariable("Departement") Departement dep) {
         return ientrepriseservice.ajouterDepartement(dep);
     }
 	

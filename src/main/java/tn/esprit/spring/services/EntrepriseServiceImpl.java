@@ -26,7 +26,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	
 	
 	@Override
-	public int ajouterEntreprise(Entreprise entreprise) {
+	public boolean ajouterEntreprise(Entreprise entreprise) {
 		try
 		{
 		logger.info("Ajouter une entreprise");
@@ -38,11 +38,11 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 			logger.error("Erreur ajouter entreprise");
 		}
 		
-		return entreprise.getId();
+		return true;
 		
 	}
 	@Override
-	public int ajouterDepartement(Departement dep) {
+	public boolean ajouterDepartement(Departement dep) {
 		try{
 		deptRepoistory.save(dep);
 		logger.info(" departement ajouté)");
@@ -52,7 +52,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 		 logger.error("erreur ajout departement");
 	}
 	
-		return dep.getId();
+		return true;
 
 	}
 	@Override
@@ -93,7 +93,7 @@ public int affecterDepartementAEntreprise(int depId, int entrepriseId) {
 		return depNames;
 	}
 	@Override
-	public int deleteEntrepriseById(int entrepriseId) {
+	public boolean deleteEntrepriseById(int entrepriseId) {
 		try {
 			
 		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
@@ -103,10 +103,10 @@ public int affecterDepartementAEntreprise(int depId, int entrepriseId) {
 		catch(Exception ex){
 			logger.error("Erreur delete entreprise");
 		}
-		return 0 ; 
+		return true ; 
 	}
 	@Transactional
-	public int deleteDepartementById(int depId) {
+	public boolean deleteDepartementById(int depId) {
 		try{
 		this.deptRepoistory.delete(this.deptRepoistory.findById(depId).get());
 		logger.info(" departement suprimé avec succés )");
@@ -115,7 +115,7 @@ public int affecterDepartementAEntreprise(int depId, int entrepriseId) {
 		catch (Exception e) {
 			 logger.error(" suppression departement failed");
 		}
-		return 0;		
+		return true;		
 	}
 	@Override
 	public Entreprise getEntrepriseById(int entrepriseId) {

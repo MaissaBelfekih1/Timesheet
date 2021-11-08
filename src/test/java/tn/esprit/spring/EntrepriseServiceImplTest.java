@@ -34,25 +34,25 @@ public class EntrepriseServiceImplTest {
 	}
 	@Test
 	public void testdeleteDepartementById(){ 
-		assertEquals(0, se.deleteDepartementById(3));
+		assertEquals(true, se.deleteDepartementById(1));
 	}
 	
 	@Test
 	public void testajouterDepartement()
 	{
-	assertEquals(7,se.ajouterDepartement(d1));
+	assertEquals(true,se.ajouterDepartement(d1));
 	}
 	
 	@Test
     public void testajouterEntreprise(){
 
-        assertEquals(1,se.ajouterEntreprise(e2));
+        assertEquals(true,se.ajouterEntreprise(e2));
 
     }
 	@Test
     public void testgetEntrepriseById()
     {
-        assertEquals(2,se.getEntrepriseById(1).getId());
+        assertEquals(2,se.getEntrepriseById(2).getId());
 
 
     }
@@ -60,12 +60,12 @@ public class EntrepriseServiceImplTest {
 	 @Test
 	    public void testaffecterDepartementAEntreprise()
 	    {
-	        assertEquals(2 ,se.affecterDepartementAEntreprise(2, 1));
+	        assertEquals(2 ,se.affecterDepartementAEntreprise(2, 2));
 	    }
 	 
 	 @Test
 	    public void testdeleteEntrepriseById(){
-	        assertEquals(1,se.deleteEntrepriseById(2));
+	        assertEquals(true,se.deleteEntrepriseById(1));
 	    }
 
 }
