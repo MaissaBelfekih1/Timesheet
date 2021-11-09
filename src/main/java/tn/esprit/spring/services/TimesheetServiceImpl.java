@@ -35,78 +35,97 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	@Autowired
 	EmployeRepository employeRepository;
 	@Override
-	public boolean ajouterMission(Mission mission) {
+public boolean ajouterMission(Mission mission) {
+		
 		try
 		{
-		logger.info("Ajouter une mission");
-		logger.debug("Debugging log");
+		logger.info("Ajouter une mission donnée");
 		missionRepository.save(mission);
+		logger.info("Mission ajoutée");
 		return true;
 		}
 		catch(Exception ex)
 		{
-			logger.error("Erreur");
+			logger.error("Erreur dans l'ajout du mission"+ex);
 		}
 		
 		return false;
 	}
-
-	@Override
+    
 	public int affecterMissionADepartement(int missionId, int depId) {
-		Mission mission = missionRepository.findById(missionId).get();
-		logger.info("Id de mission " +mission.getId());
 		
+		logger.info("Affecter Mission A Departement");
+		
+		logger.debug("Récupérer mission selon id "+missionId);
+		Mission mission = missionRepository.findById(missionId).get();
+		logger.debug("mission récupérée");
+		
+		logger.debug("Récupérer departement selon id "+depId);
 		Departement dep = deptRepoistory.findById(depId).get();
-		logger.info("Id de departement"+dep.getId());
+		logger.debug("departement récupéré");
 		
 		try
 		{
-		logger.info("Affecter Mission A Departement");
-		logger.debug("Debugging log");
 		
+		logger.debug("enregistrer le departement récupéré a la mission récupérée ");
 		mission.setDepartement(dep);
+		logger.debug("enregistrement valide");
+		
+		logger.debug("enregistrer les modifications de la mission récupérée");
 		missionRepository.save(mission);
+		logger.debug("enregistrement valide");
+		
+		logger.info("Mission affectée");
 		}
 		
 		catch(Exception ex)
 		{
-			logger.error("Erreur");
+			logger.error("Erreur dans l'affectation"+ex);
 		}
 		return mission.getId();
-		
 	}
 
-	@Override
 	public boolean ajouterTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin) {
-TimesheetPK timesheetPK = new TimesheetPK();
+		logger.info("Ajouter timesheet");
 		
+		logger.debug("Nouveau instance du clé primaire timesheetpk");
+		TimesheetPK timesheetPK = new TimesheetPK();
+		logger.debug("Ajouter les paramétres dans l'instance");
+		
+		logger.debug("Ajouter la date debut dans le clé primaire composé timesheetpk");
 		timesheetPK.setDateDebut(dateDebut);
-		logger.info("Date debut"+ dateDebut);
+		logger.debug("Date debut"+ dateDebut);
 		
+		logger.debug("Ajouter la date fin dans le clé primaire composé timesheetpk");
 		timesheetPK.setDateFin(dateFin);
-		logger.info("Date fin"+ dateFin);
+		logger.debug("Date fin"+ dateFin);
 		
+		logger.debug("Ajouter un employe dans le clé primaire composé timesheetpk");
 		timesheetPK.setIdEmploye(employeId);
-		logger.info("Id employe"+ employeId);
+		logger.debug("Id employe"+ employeId);
 		
+		logger.debug("Ajouter une mission dans le clé primaire composé timesheetpk");
 		timesheetPK.setIdMission(missionId);
-		logger.info("Id mission"+ missionId);
+		logger.debug("Id mission"+ missionId);
 		
+		logger.debug("Nouveau instance du timesheet");
 		Timesheet timesheet = new Timesheet();
+		logger.debug("Ajouter le clé primaire au timesheet");
+		
 		timesheet.setTimesheetPK(timesheetPK);
+		logger.debug("Ajouter la validité de timesheet");
 		timesheet.setValide(false); //par defaut non valide
 		
 		try
 		{
-		logger.info("ajouterTimesheet");
-		logger.debug("Debugging log");
+		logger.debug("Enregistrement...");
 		timesheetRepository.save(timesheet);
-		return true;
+		logger.info("Timesheet ajouté");
 	}
 		
 		catch(Exception ex)
 		{
-			logger.error("Erreur");
+			logger.error("Erreur dans l'ajout de timesheet"+ex);
 		}
 		return false;
 	}
