@@ -35,7 +35,7 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	@Autowired
 	EmployeRepository employeRepository;
 	@Override
-public boolean ajouterMission(Mission mission) {
+	public boolean ajouterMission(Mission mission) {
 		
 		try
 		{
@@ -46,21 +46,21 @@ public boolean ajouterMission(Mission mission) {
 		}
 		catch(Exception ex)
 		{
-			logger.error("Erreur dans l'ajout du mission"+ex);
+			logger.error(ex);
 		}
 		
 		return false;
 	}
     
 	public int affecterMissionADepartement(int missionId, int depId) {
-		
+	
 		logger.info("Affecter Mission A Departement");
 		
-		logger.debug("Récupérer mission selon id "+missionId);
-		Mission mission = missionRepository.findById(missionId).get();
-		logger.debug("mission récupérée");
+		logger.debug("Récupérer mission selon id ");		
+		Mission mission = missionRepository.findById(missionId).get() ;
+		logger.debug("Mission récupérée ");
 		
-		logger.debug("Récupérer departement selon id "+depId);
+		logger.debug("Récupérer departement selon id ");
 		Departement dep = deptRepoistory.findById(depId).get();
 		logger.debug("departement récupéré");
 		
@@ -80,7 +80,7 @@ public boolean ajouterMission(Mission mission) {
 		
 		catch(Exception ex)
 		{
-			logger.error("Erreur dans l'affectation"+ex);
+			logger.error(ex);
 		}
 		return mission.getId();
 	}
@@ -94,19 +94,19 @@ public boolean ajouterMission(Mission mission) {
 		
 		logger.debug("Ajouter la date debut dans le clé primaire composé timesheetpk");
 		timesheetPK.setDateDebut(dateDebut);
-		logger.debug("Date debut"+ dateDebut);
+		logger.debug("Date debut ajoutée");
 		
 		logger.debug("Ajouter la date fin dans le clé primaire composé timesheetpk");
 		timesheetPK.setDateFin(dateFin);
-		logger.debug("Date fin"+ dateFin);
+		logger.debug("Date fin ajoutée");
 		
 		logger.debug("Ajouter un employe dans le clé primaire composé timesheetpk");
 		timesheetPK.setIdEmploye(employeId);
-		logger.debug("Id employe"+ employeId);
+		logger.debug("Id employe ajouté");
 		
 		logger.debug("Ajouter une mission dans le clé primaire composé timesheetpk");
 		timesheetPK.setIdMission(missionId);
-		logger.debug("Id mission"+ missionId);
+		logger.debug("Id mission ajouté");
 		
 		logger.debug("Nouveau instance du timesheet");
 		Timesheet timesheet = new Timesheet();
@@ -125,11 +125,10 @@ public boolean ajouterMission(Mission mission) {
 		
 		catch(Exception ex)
 		{
-			logger.error("Erreur dans l'ajout de timesheet"+ex);
+			logger.error(ex);
 		}
 		return false;
 	}
-
 
 
 		
